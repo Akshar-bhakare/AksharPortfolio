@@ -14,7 +14,7 @@
 
 'use client'
 import React, { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Sun, Moon, Download, Mail, Linkedin, Twitter, Github, ExternalLink } from 'lucide-react'
 
 const THEME_KEY = 'akshar_theme'
@@ -39,7 +39,7 @@ export default function Page() {
   useEffect(() => {
     if (!mounted) return
     document.documentElement.classList.toggle('dark', theme === 'dark')
-    try { localStorage.setItem(THEME_KEY, theme) } catch (e) {}
+    try { localStorage.setItem(THEME_KEY, theme) } catch {}
   }, [theme, mounted])
 
   // enable smooth scrolling (helps anchor links)
@@ -49,16 +49,7 @@ export default function Page() {
     return () => { document.documentElement.style.scrollBehavior = prev }
   }, [])
 
-  // helper: smooth scroll to section and account for sticky header
-  function handleNavClick(e: React.MouseEvent, id: string) {
-    e.preventDefault()
-    const el = document.getElementById(id)
-    if (!el) return
-    const header = document.querySelector('header')
-    const headerHeight = header ? (header as HTMLElement).getBoundingClientRect().height : 0
-    const top = el.getBoundingClientRect().top + window.scrollY - headerHeight - 12 // small offset
-    window.scrollTo({ top, behavior: 'smooth' })
-  }
+
 
   const projects = [
     {
@@ -336,9 +327,9 @@ export default function Page() {
             >
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 text-center">About</h2>
               <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto text-center leading-relaxed mb-12 sm:mb-16 px-4">
-                I'm a 3rd yr CSE student @DYPDPU... <br className="hidden sm:block"></br>
+                I&apos;m a 3rd yr CSE student @DYPDPU... <br className="hidden sm:block"></br>
                 I love to code and build websites and vibe code... <br className="hidden sm:block"></br>
-                I've been focusing on Next.js and integrating AI tools to accelerate development...
+                I&apos;ve been focusing on Next.js and integrating AI tools to accelerate development...
               </p>
 
               <div className="text-center">
@@ -437,7 +428,7 @@ export default function Page() {
               className="pt-8 sm:pt-16"
             >
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-5 text-center">Get in touch</h2>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-8 sm:mb-10 text-center max-w-2xl mx-auto px-4">Have an idea or opportunity? I'd love to hear about it.</p>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-8 sm:mb-10 text-center max-w-2xl mx-auto px-4">Have an idea or opportunity? I&apos;d love to hear about it.</p>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
                 <form className="space-y-5 bg-white/80 dark:bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 dark:border-neutral-700 shadow-lg shadow-black/5 dark:shadow-black/20">
@@ -535,7 +526,16 @@ function Stat({ label, value }: { label: string; value: string }){
   )
 }
 
-function ProjectCard({ project, index }: { project: any; index: number }){
+interface Project {
+  name: string;
+  description: string;
+  tech: string[];
+  demo: string;
+  github: string;
+  image: string;
+}
+
+function ProjectCard({ project, index }: { project: Project; index: number }){
   return (
     <motion.article
       initial={{ opacity: 0, y: 10 }}
