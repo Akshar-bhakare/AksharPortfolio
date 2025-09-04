@@ -157,7 +157,7 @@ export default function Page() {
                   transition={{ delay: 0.5, duration: 0.8 }}
                   className="text-3xl sm:text-4xl font-black leading-tight"
                 >
-                  Hi, I'm{' '}
+                  Hi, I&apos;m{' '}
                   <span className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-emerald-500 bg-clip-text text-transparent animate-gradient bg-300% dark:from-[#22D3EE] dark:via-[#6EE7B7] dark:to-[#22D3EE]">
                     Akshar
                   </span>
@@ -238,7 +238,7 @@ export default function Page() {
                     transition={{ delay: 0.3, duration: 0.8 }}
                     className="text-4xl xl:text-5xl font-black leading-tight"
                   >
-                    Hi, I'm{' '}
+                    Hi, I&apos;m{' '}
                     <span className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-emerald-500 bg-clip-text text-transparent animate-gradient bg-300% dark:from-[#22D3EE] dark:via-[#6EE7B7] dark:to-[#22D3EE]">
                       Akshar
                     </span>{' '}
