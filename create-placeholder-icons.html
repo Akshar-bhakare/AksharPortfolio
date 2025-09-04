@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Tech Icons</title>
+</head>
+<body>
+    <canvas id="canvas" width="64" height="64" style="display: none;"></canvas>
+    <div id="download-links"></div>
+
+    <script>
+        const technologies = [
+            { name: 'JavaScript', color: '#F7DF1E', textColor: '#000' },
+            { name: 'TypeScript', color: '#3178C6', textColor: '#fff' },
+            { name: 'React', color: '#61DAFB', textColor: '#000' },
+            { name: 'Next.js', color: '#000000', textColor: '#fff' },
+            { name: 'Node.js', color: '#339933', textColor: '#fff' },
+            { name: 'MongoDB', color: '#47A248', textColor: '#fff' },
+            { name: 'Postgres', color: '#336791', textColor: '#fff' },
+            { name: 'Prisma', color: '#2D3748', textColor: '#fff' },
+            { name: 'Tailwind CSS', color: '#06B6D4', textColor: '#fff' },
+            { name: 'Framer Motion', color: '#0055FF', textColor: '#fff' },
+            { name: 'Docker', color: '#2496ED', textColor: '#fff' },
+            { name: 'Git', color: '#F05032', textColor: '#fff' }
+        ];
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const downloadLinks = document.getElementById('download-links');
+
+        technologies.forEach(tech => {
+            // Clear canvas
+            ctx.clearRect(0, 0, 64, 64);
+            
+            // Draw background circle
+            ctx.fillStyle = tech.color;
+            ctx.beginPath();
+            ctx.arc(32, 32, 30, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Draw text
+            ctx.fillStyle = tech.textColor;
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            const initials = tech.name.split(' ').map(word => word[0]).join('').substring(0, 2);
+            ctx.fillText(initials, 32, 32);
+            
+            // Create download link
+            const link = document.createElement('a');
+            link.download = tech.name.toLowerCase().replace(/[^a-z0-9]/g, '') + '.png';
+            link.href = canvas.toDataURL();
+            link.textContent = `Download ${tech.name} icon`;
+            link.style.display = 'block';
+            link.style.margin = '5px 0';
+            downloadLinks.appendChild(link);
+        });
+    </script>
+</body>
+</html>
